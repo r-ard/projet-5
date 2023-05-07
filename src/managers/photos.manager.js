@@ -6,6 +6,8 @@ const hashHelper = require('../utils/hash.helper');
 class PhotosManager {
     constructor() {
         this.photosPath = `${fileHelper.getRootPath()}/photos`;
+        if(!fs.existsSync(this.photosPath))
+            fs.mkdirSync(this.photosPath);
     }
 
     photoExists(name) {
