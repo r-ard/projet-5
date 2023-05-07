@@ -1,0 +1,7 @@
+/node_modules
+/uploads/*
+/photos/*
+/config.json
+/dev.config.json
+/package-lock.json
+/yarn.lock
