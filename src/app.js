@@ -93,7 +93,6 @@ class App {
                         throw new Error(`Failed to get the express register method for the "${route.method} method"`);
 
                     const middlewares = [(req, res, next) => { req.appInstance = this; next(); }];
-                    //if(route.handleFile) middlewares.push(createHandleFileMiddleware(route.handleFile));
 
                     if(route.middlewares)
                         (route.middlewares instanceof Array ? Array.from(route.middlewares) : [route.middlewares])
