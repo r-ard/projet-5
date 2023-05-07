@@ -8,6 +8,7 @@ module.exports = class AuthController extends Controller {
         super(server);
 
         this.hashAlgorithm = this.appInstance.appConfig.hash.algorithm;
+        this.hashSalt = this.appInstance.appConfig.hash.salt;
         this.jwtKey = this.appInstance.appConfig.jwt.key;
         this.jwtExpiration = this.appInstance.appConfig.jwt.expiration;
     }
@@ -42,7 +43,7 @@ module.exports = class AuthController extends Controller {
 
             await User.create({
                 email: body.email,
-                password: hashHelper.hashString(body.password, this.hashAlgorithm),
+                password: hashHelper.hashString(body.password, this.hashAlgorithm, this.hashSalt),
                 created_at: new Date()
             });
 
@@ -68,7 +69,7 @@ module.exports = class AuthController extends Controller {
 
             const user = await User.findOne({ email: body.email }).exec();
             if(!user 
-                || !hashHelper.compareHash(user.password, body.password, this.hashAlgorithm)
+                || !hashHelper.compareHash(user.password, body.password, this.hashAlgorithm, this.hashSalt)
                 )
                 throw new Error("Invalid email or password");
 

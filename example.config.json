@@ -9,6 +9,7 @@
         "expiration": 3600
     },
     "hash": {
+        "salt": "",
         "algorithm": [
             {
                 "name": "sha256",

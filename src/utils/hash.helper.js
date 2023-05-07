@@ -1,10 +1,10 @@
 const crypto = require('crypto');
 
 module.exports = {
-    hashString: function(string, algorithm) {
+    hashString: function(string, algorithm, salt = undefined) {
         if(typeof algorithm === 'string') algorithm = [{ name: algorithm, iteration: 1 }];
 
-        let hashedString = string;
+        let hashedString = `${salt ? salt : ''}${string}`;
 
         try {
             algorithm.forEach(method => {
@@ -20,7 +20,7 @@ module.exports = {
 
         return hashedString;
     },
-    compareHash: function(hashedString, string, algorithm) {
-        return hashedString.toLowerCase() == this.hashString(string, algorithm).toLowerCase();
+    compareHash: function(hashedString, string, algorithm, salt = undefined) {
+        return hashedString.toLowerCase() == this.hashString(`${salt ? salt : ''}${string}`, algorithm).toLowerCase();
     }
 };
