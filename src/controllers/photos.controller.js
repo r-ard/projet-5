@@ -1,12 +1,14 @@
 const Controller = require("../core/controller");
 const photosManager = require("../managers/photos.manager");
+const authMiddleware = require("../middlewares/auth.middleware");
 
 module.exports = class PhotosController extends Controller {
     getRoutes() {
         return {
             path: '/photos/:photo',
             method: 'GET',
-            handler: this.photo
+            handler: this.photo,
+            middlewares: [authMiddleware.checkToken]
         };
     }
 

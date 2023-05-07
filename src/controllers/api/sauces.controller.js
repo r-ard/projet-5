@@ -152,6 +152,8 @@ module.exports = class SaucesController extends Controller {
                 usersLiked: [],
                 usersDisliked: []
             });
+
+            this.processSauceImageUrl(sauce._doc);
     
             res.json({
                 ...sauce._doc,
