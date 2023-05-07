@@ -2,6 +2,11 @@ const fs = require("fs");
 const { dirname } = require('path');
 
 module.exports = {
+    /**
+     * Récupérer tous les fichiers d'un dossier de manière récursive.
+     * @param {string} path 
+     * @returns {string[]}
+     */
     getFiles: function(path) {
         try {
             const entries = fs.readdirSync(path, { withFileTypes: true });
@@ -21,6 +26,10 @@ module.exports = {
         }
         return [];
     },
+    /**
+     * Récupérer le dossier Root du projet
+     * @returns {string}
+     */
     getRootPath: function() {
         return dirname(require.main.filename);
     }

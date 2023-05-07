@@ -16,6 +16,7 @@ const UserSchema = Mongoose.Schema({
         required: true
     }
 });
+// Ajout du plugin qui vérifie l'unicité d'un champ dans la base de donné.
 UserSchema.plugin(UniquePlugin);
 
 const User = Mongoose.model('user', UserSchema);

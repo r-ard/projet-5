@@ -28,6 +28,12 @@ module.exports = class AuthController extends Controller {
         ];
     }
 
+    /**
+     * Créer un compte
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async signup(req, res) {
         const body = this.extractParams(
             req,
@@ -54,6 +60,12 @@ module.exports = class AuthController extends Controller {
         }
     }
 
+    /**
+     * S'authentifier
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async login(req, res) {
         const body = this.extractParams(
             req,

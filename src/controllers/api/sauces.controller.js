@@ -60,10 +60,22 @@ module.exports = class SaucesController extends Controller {
         ];
     }
 
+    /**
+     * Méthode utilisé pour normalisé l'url de l'image d'une sauce
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     processSauceImageUrl(sauce) {
         sauce.imageUrl = `${this.photosUrl}${sauce.imageUrl}`;
     }
 
+    /**
+     * Récupèrer toutes les sauces dans la base de donnée
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async getSauces(req, res) {
         try {
             const sauces = await Sauce.find().exec();
@@ -75,6 +87,12 @@ module.exports = class SaucesController extends Controller {
         }
     }
 
+    /**
+     * Récupère une sauce par son id
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async getSauceById(req, res) {
         try {
             const sauce = await Sauce.findById(req.params.id).exec();
@@ -90,6 +108,12 @@ module.exports = class SaucesController extends Controller {
         }
     }
 
+    /**
+     * Supprime une sauce
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async deleteSauce(req, res) {
         try {
             const sauce = await Sauce.deleteOne({ _id: req.params.deleteid }).exec();
@@ -104,6 +128,12 @@ module.exports = class SaucesController extends Controller {
         }
     }
 
+    /**
+     * Créer une sauce
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async createSauce(req, res) {
         const body = this.extractParams(
             req,
@@ -165,6 +195,12 @@ module.exports = class SaucesController extends Controller {
         }
     }
 
+    /**
+     * Met à jour une sauce
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async updateSauce(req, res) {
         let updateSauce = null;
         try {
@@ -175,6 +211,7 @@ module.exports = class SaucesController extends Controller {
             return this.send404(res);
         }
 
+        // Vérifie si la sauce appartient bien à l'utilisateur
         if(updateSauce.userId != req.params.userId)
             return this.sendError(res, 'unauthorized', 401);
 
@@ -217,6 +254,12 @@ module.exports = class SaucesController extends Controller {
         }
     }
 
+    /**
+     * Met à jour le like de l'utilisateur authentifié
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     async updateSauceLike(req, res) {
         let updateSauce = null;
         try {

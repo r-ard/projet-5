@@ -12,6 +12,12 @@ module.exports = class PhotosController extends Controller {
         };
     }
 
+    /**
+     * Récupérer une photo à partir de son nom
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @returns 
+     */
     photo(req, res) {
         if(!req.params.photo || !photosManager.photoExists(req.params.photo))
             return this.send404(res);

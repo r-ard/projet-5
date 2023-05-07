@@ -1,6 +1,12 @@
 const { jwtDecode } = require("../utils/jwt.helper");
 
 module.exports = {
+    /**
+     * Middleware pour vérifier l'authentification du client et définir l'id utilisateur dans les params de la requête.
+     * @param {Express.Request} req 
+     * @param {Express.Response} res 
+     * @param {Function} next 
+     */
     checkToken: (req, res, next) => {
         const unAuthorizedHandler = () => {
             res.status(403).send('unauthorized request.');
