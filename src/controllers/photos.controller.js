@@ -7,8 +7,7 @@ module.exports = class PhotosController extends Controller {
         return {
             path: '/photos/:photo',
             method: 'GET',
-            handler: this.photo,
-            middlewares: [/*authMiddleware.checkToken*/]
+            handler: this.photo
         };
     }
 
