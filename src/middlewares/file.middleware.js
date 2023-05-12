@@ -19,9 +19,9 @@ module.exports = {
             }
             catch(err) {}
 
-            if(req[fieldName]) {
-                const filePath = `${fileHelper.getRootPath()}\\${req[fieldName].path}`;
-                req[fieldName].absolutePath = filePath;
+            if(req['file']) {
+                const filePath = `${fileHelper.getRootPath()}\\${req['file'].path}`;
+                req['file'].absolutePath = filePath;
 
                 const ogResEnd = res.end;
                 res['end'] = (arg) => {

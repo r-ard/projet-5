@@ -5,6 +5,7 @@ const path = require('path');
 const Mongoose = require('mongoose');
 const Controller = require("./core/controller");
 
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const { createHandleFileMiddleware } = require("./middlewares/file.middleware");
@@ -58,6 +59,7 @@ class App {
 
             this._server.use(bodyParser.json());
             this._server.use(bodyParser.urlencoded({ extended: true }));
+            this._server.use(cors());
 
             this._loadControllers();
             this._loadRoutes(this._server);

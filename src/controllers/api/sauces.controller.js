@@ -33,7 +33,7 @@ module.exports = class SaucesController extends Controller {
                 handler: this.createSauce,
                 middlewares: [
                     authMiddleware.checkToken,
-                    fileMiddleware.createHandleFileMiddleware('file')
+                    fileMiddleware.createHandleFileMiddleware('image')
                 ]
             },
             {
@@ -42,7 +42,7 @@ module.exports = class SaucesController extends Controller {
                 handler: this.updateSauce,
                 middlewares: [
                     authMiddleware.checkToken,
-                    fileMiddleware.createHandleFileMiddleware('file')
+                    fileMiddleware.createHandleFileMiddleware('image')
                 ]
             },
             {
@@ -142,7 +142,7 @@ module.exports = class SaucesController extends Controller {
             }
         );
 
-        if(!body || !req['file'])
+        if(!body || !req['file'] || req['file'].fieldname != 'image')
             return this.sendError(res, "Invalid Body");
 
         let parsedSauce = null;
@@ -222,7 +222,7 @@ module.exports = class SaucesController extends Controller {
             if(req.body) {
                 updateBody = this.extractParams(
                     // form-data or JSON body
-                    req.body.sauce ? { body: JSON.parse(body.sauce) } : req,
+                    req.body.sauce ? { body: JSON.parse(req.body.sauce) } : req,
                     {
                         name: String,
                         manufacturer: String,
@@ -235,7 +235,7 @@ module.exports = class SaucesController extends Controller {
             }
 
             // Image
-            if(req['file']) {
+            if(req['file'] && req['file'].fieldname == 'image') {
                 const uploadedPhoto = photosManager.createPhoto(req['file'].absolutePath, path.extname(req['file'].originalname));
 
                 if(updateSauce.imageUrl)
