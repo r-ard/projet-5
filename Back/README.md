@@ -1,6 +1,6 @@
 # Projet 6 (API)
 
-Servveur Node.JS d'API REST pour le site "Piquante".
+Serveur Node.JS d'API REST pour le site "Piquante".
 
 ## Comment faire fonctionner le projet ?
 
