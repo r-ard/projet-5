@@ -1,4 +1,4 @@
-# Projet 6
+# Projet 6 (API)
 
 Servveur Node.JS d'API REST pour le site "Piquante".
 
